@@ -2,9 +2,6 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
-      - main
     paths:
       - grammar.js
       - src/**
@@ -29,9 +26,6 @@ jobs:
   test:
     name: Test parser
     runs-on: ${{matrix.os}}
-    if: >-
-      !github.event.repository.is_template &&
-      github.event.head_commit.message != 'Initial commit'
     strategy:
       fail-fast: false
       matrix:
@@ -48,9 +42,6 @@ jobs:
   fuzz:
     name: Fuzz scanner
     runs-on: ubuntu-latest
-    if: >-
-      !github.event.repository.is_template &&
-      github.event.head_commit.message != 'Initial commit'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
